@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="description" content="澎湖旅遊介紹，帶你認識澎湖的景點、文化、美食與花火。">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>澎湖｜海風吹過的島嶼</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Microsoft JhengHei", "Noto Sans TC", sans-serif;
+            background: #f4fbfc;
+            color: #24434b;
+            line-height: 1.8;
+        }
+
+        /* =========================
+           導覽列
+        ========================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 7%;
+            z-index: 1000;
+            box-shadow: 0 3px 15px rgba(0, 80, 100, 0.08);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+            color: #167c91;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #355b63;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #e98b62;
+        }
+
+        /* =========================
+           Hero 首頁
+        ========================= */
+
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    rgba(0, 65, 85, 0.28),
+                    rgba(0, 55, 75, 0.48)
+                ),
+                url("澎湖海景.jpg") center center / cover no-repeat;
+        }
+
+        .sun,
+        .cloud {
+            display: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            color: white;
+            padding: 30px;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.35);
+        }
+
+        .hero-small {
+            font-size: 15px;
+            letter-spacing: 6px;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-size: clamp(70px, 12vw, 150px);
+            line-height: 1;
+            letter-spacing: 15px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 22px;
+            letter-spacing: 3px;
+            margin-bottom: 35px;
+        }
+
+        .hero-button {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 2px solid white;
+            border-radius: 50px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .hero-button:hover {
+            background: white;
+            color: #167c91;
+        }
+
+        /* =========================
+           共用
+        ========================= */
+
+        section {
+            padding: 100px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title span {
+            color: #e98b62;
+            font-size: 14px;
+            letter-spacing: 4px;
+            font-weight: bold;
+        }
+
+        .section-title h2 {
+            font-size: 42px;
+            color: #176d7e;
+            margin-top: 5px;
+        }
+
+        .section-title p {
+            color: #71898e;
+            margin-top: 8px;
+        }
+
+        /* =========================
+           認識澎湖
+        ========================= */
+
+        .about {
+            background: #ffffff;
+        }
+
+        .about-container {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center;
+        }
+
+        .about-text h3 {
+            font-size: 30px;
+            color: #176d7e;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            color: #61787d;
+            margin-bottom: 15px;
+        }
+
+        .about-art {
+            min-height: 360px;
+            border-radius: 35px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 45px rgba(0, 90, 110, 0.15);
+
+            background:
+                linear-gradient(
+                    rgba(10, 90, 110, 0.15),
+                    rgba(10, 90, 110, 0.35)
+                ),
+                url("澎湖海景.jpg") center / cover no-repeat;
+        }
+
+        /* =========================
+           景點
+        ========================= */
+
+        .spots {
+            background: #eef9fa;
+        }
+
+        .cards {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 90, 110, 0.08);
+            transition: 0.35s;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 18px 35px rgba(0, 90, 110, 0.15);
+        }
+
+        .card-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .card-icon {
+            width: 100%;
+            height: 180px;
+            border-radius: 18px;
+            background: #dff3f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 70px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            color: #176d7e;
+            font-size: 23px;
+            margin-bottom: 8px;
+        }
+
+        .card p {
+            color: #71898e;
+            font-size: 15px;
+            margin-bottom: 15px;
+        }
+
+        .card button {
+            border: none;
+            background: none;
+            color: #e37d55;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .card button:hover {
+            text-decoration: underline;
+        }
+
+        /* =========================
+           文化
+        ========================= */
+
+        .culture {
+            background: white;
+        }
+
+        .detail-list {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 70px;
+        }
+
+        .detail {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .detail:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .detail-image {
+            width: 48%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(0, 80, 100, 0.15);
+            flex-shrink: 0;
+        }
+
+        .detail-art {
+            width: 48%;
+            height: 300px;
+            border-radius: 30px;
+            background: #e4f5f6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            flex-shrink: 0;
+        }
+
+        .detail-text {
+            flex: 1;
+        }
+
+        .detail-text h3 {
+            color: #176d7e;
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+
+        .detail-text p {
+            color: #657d82;
+        }
+
+        /* =========================
+           美食
+        ========================= */
+
+        .food {
+            background: #fff7f1;
+        }
+
+        .food-grid {
+            max-width: 1100px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .food-card {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            border-radius: 25px;
+            box-shadow: 0 8px 25px rgba(100, 70, 40, 0.08);
+            transition: 0.3s;
+        }
+
+        .food-card:hover {
+            transform: translateY(-6px);
+        }
+
+        .food-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .food-card h3 {
+            color: #9c6349;
+            margin-bottom: 8px;
+        }
+
+        .food-card p {
+            color: #7f7772;
+            font-size: 14px;
+        }
+
+        /* =========================
+           澎湖小知識
+        ========================= */
+
+        .facts {
+            background: #eaf7f8;
+        }
+
+        .facts-grid {
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .fact {
+            text-align: center;
+            background: white;
+            padding: 30px 15px;
+            border-radius: 20px;
+        }
+
+        .fact strong {
+            display: block;
+            font-size: 35px;
+            color: #167c91;
+            margin-bottom: 5px;
+        }
+
+        .fact span {
+            color: #71898e;
+        }
+
+        /* =========================
+           花火
+        ========================= */
+
+        .fireworks {
+            min-height: 600px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            color: white;
+
+            background:
+                linear-gradient(
+                    rgba(5, 35, 55, 0.50),
+                    rgba(5, 20, 35, 0.72)
+                ),
+                url("澎湖花火.jpg") center center / cover no-repeat;
+        }
+
+        .fireworks .section-title h2 {
+            color: white;
+        }
+
+        .fireworks .section-title span {
+            color: #ffd98a;
+        }
+
+        .fireworks .section-title p {
+            color: #e5eef0;
+        }
+
+        .firework-button {
+            border: 2px solid white;
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: relative;
+            z-index: 20;
+        }
+
+        .firework-button:hover {
+            background: white;
+            color: #176d7e;
+        }
+
+        #fireworks {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+
+        .spark {
+            position: absolute;
+            left: 50%;
+            top: 45%;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: white;
+            box-shadow: 0 0 10px white;
+            animation: explode 1.4s ease-out forwards;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+
+            100% {
+                transform:
+                    translate(
+                        calc(var(--x) * 1px),
+                        calc(var(--y) * 1px)
+                    )
+                    scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* =========================
+           Footer
+        ========================= */
+
+        footer {
+            background: #173e48;
+            color: #d9edef;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        footer p {
+            font-size: 14px;
+            color: #a8c3c7;
+        }
+
+        /* =========================
+           回到頂端
+        ========================= */
+
+        #topBtn {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: #167c91;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 80, 100, 0.25);
+            display: none;
+            z-index: 900;
+        }
+
+        #topBtn:hover {
+            background: #e98b62;
+        }
+
+        /* =========================
+           平板
+        ========================= */
+
+        @media (max-width: 900px) {
+
+            nav {
+                padding: 0 4%;
+            }
+
+            nav ul {
+                gap: 12px;
+                font-size: 14px;
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .food-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .facts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+
+            .detail,
+            .detail:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .detail-image,
+            .detail-art {
+                width: 100%;
+            }
+        }
+
+        /* =========================
+           手機
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            nav {
+                height: 60px;
+            }
+
+            .logo {
+                font-size: 17px;
+            }
+
+            nav ul {
+                display: none;
+            }
+
+            section {
+                padding: 75px 6%;
+            }
+
+            .hero h1 {
+                font-size: 75px;
+                letter-spacing: 8px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            .section-title h2 {
+                font-size: 32px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .food-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .facts-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .detail-image {
+                width: 100%;
+                height: 280px;
+            }
+
+            .detail-art {
+                width: 100%;
+                height: 250px;
+            }
+
+            .about-art {
+                min-height: 280px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         導覽列
+    ========================= -->
+
+    <nav>
+        <div class="logo">🌊 澎湖旅行誌</div>
+
+        <ul>
+            <li><a href="#about">認識澎湖</a></li>
+            <li><a href="#spots">景點</a></li>
+            <li><a href="#culture">文化</a></li>
+            <li><a href="#food">美食</a></li>
+            <li><a href="#fireworks-section">花火</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- =========================
+         Hero
+    ========================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="hero-small">
+                PENGHU · TAIWAN
+            </div>
+
+            <h1>澎湖</h1>
+
+            <p>
+                海風吹過的地方，故事就留在島上。
+            </p>
+
+            <a href="#about" class="hero-button">
+                開始探索澎湖 ↓
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         認識澎湖
+    ========================= -->
+
+    <section class="about" id="about">
+
+        <div class="section-title">
+            <span>ABOUT PENGHU</span>
+            <h2>認識澎湖</h2>
+            <p>一座被海風吹拂的島嶼群</p>
+        </div>
+
+        <div class="about-container">
+
+            <div class="about-text">
+
+                <h3>海，是澎湖的日常。</h3>
+
+                <p>
+                    澎湖位於臺灣海峽，是由許多島嶼組成的群島。
+                    藍色的大海、潔白的沙灘、特殊的玄武岩地形，
+                    讓澎湖擁有獨特的海島風景。
+                </p>
+
+                <p>
+                    除了自然景觀之外，澎湖也保留了許多傳統文化，
+                    像是石滬、古厝以及地方特色美食。
+                </p>
+
+                <p>
+                    每到夏季，澎湖夜空中的花火更成為許多人
+                    來到這座島嶼的重要回憶。
+                </p>
+
+            </div>
+
+            <div class="about-art"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         景點
+    ========================= -->
+
+    <section class="spots" id="spots">
+
+        <div class="section-title">
+            <span>PLACES TO VISIT</span>
+            <h2>澎湖景點</h2>
+            <p>來看看這座島上不能錯過的風景</p>
+        </div>
+
+        <div class="cards">
+
+            <!-- 1 -->
+
+            <div class="card">
+
+                <img
+                    src="跨海大橋.jpg"
+                    alt="澎湖跨海大橋"
+                    class="card-image"
+                >
+
+                <h3>澎湖跨海大橋</h3>
+
+                <p>
+                    連接白沙與西嶼的重要交通建設，
+                    也是澎湖非常具有代表性的地標。
+                </p>
+
+                <button onclick="showInfo('澎湖跨海大橋是連接白沙與西嶼的重要橋梁，也是許多遊客來到澎湖必拍的景點！')">
+                    查看介紹 →
+                </button>
+
+            </div>
+
+
+            <!-- 2 -->
+
+            <div class="card">
+
+                <img
+                    src="柱狀玄武岩.jpg"
+                    alt="柱狀玄武岩"
+                    class="card-image"
+                >
+
+                <h3>柱狀玄武岩</h3>
+
+                <p>
+                    火山熔岩冷卻後形成的特殊地形，
+                    在澎湖可以看到壯觀的柱狀岩壁。
+                </p>
+
+                <button onclick="showInfo('澎湖的玄武岩是火山活動形成的自然景觀，整齊的柱狀岩壁非常有特色。')">
+                    查看介紹 →
+                </button>
+
+            </div>
+
+
+            <!-- 3 -->
+
+            <div class="card">
+
+                <img
+                    src="雙心石滬.jpg"
+                    alt="雙心石滬"
+                    class="card-image"
+                >
+
+                <h3>雙心石滬</h3>
+
+                <p>
+                    位於七美島的著名景點，
+                    兩個心形石滬排列在海岸邊，非常浪漫。
+                </p>
+
+                <button onclick="showInfo('雙心石滬位於澎湖七美島，是利用石頭堆砌而成的傳統捕魚設施，也因為心形造型成為著名景點。')">
+                    查看介紹 →
+                </button>
+
+            </div>
+
+
+            <!-- 4 -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🏠
+                </div>
+
+                <h3>傳統古厝</h3>
+
+                <p>
+                    澎湖保存許多傳統民宅，
+                    可以從建築看見當地居民過去的生活方式。
+                </p>
+
+                <button onclick="showInfo('澎湖傳統古厝常使用當地材料建造，也能看到許多具有地方特色的建築細節。')">
+                    查看介紹 →
+                </button>
+
+            </div>
+
+
+            <!-- 5 -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🌳
+                </div>
+
+                <h3>通樑古榕</h3>
+
+                <p>
+                    位於通樑保安宮旁的巨大榕樹，
+                    擁有許多交錯的氣根，是澎湖知名景觀。
+                </p>
+
+                <button onclick="showInfo('通樑古榕樹齡悠久，枝葉與氣根形成壯觀景象，是澎湖非常有特色的自然景觀。')">
+                    查看介紹 →
+                </button>
+
+            </div>
+
+
+            <!-- 6 -->
+
+            <div class="card">
+
+                <div class="card-icon">
+                    🌊
+                </div>
+
+                <h3>澎湖海岸</h3>
+
+                <p>
+                    藍色海水、海蝕地形與海風吹拂，
+                    組成澎湖最經典的海島風景。
+                </p>
+
+                <button onclick="showInfo('澎湖擁有豐富的海岸景觀，不同島嶼都能看到不同的海蝕地形與海景。')">
+                    查看介紹 →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         文化
+    ========================= -->
+
+    <section class="culture" id="culture">
+
+        <div class="section-title">
+            <span>LOCAL CULTURE</span>
+            <h2>島嶼文化</h2>
+            <p>從岩石、石滬到傳統建築</p>
+        </div>
+
+
+        <div class="detail-list">
+
+            <!-- 1 -->
+
+            <div class="detail">
+
+                <img
+                    src="柱狀玄武岩.jpg"
+                    alt="澎湖柱狀玄武岩"
+                    class="detail-image"
+                >
+
+                <div class="detail-text">
+
+                    <h3>🪨 柱狀玄武岩</h3>
+
+                    <p>
+                        澎湖有非常豐富的火山地形，
+                        其中最具代表性的就是柱狀玄武岩。
+                        當火山熔岩慢慢冷卻時，會形成規則的柱狀裂隙，
+                        最後變成現在看到的特殊岩壁。
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- 2 -->
+
+            <div class="detail">
+
+                <img
+                    src="雙心石滬.jpg"
+                    alt="澎湖雙心石滬"
+                    class="detail-image"
+                >
+
+                <div class="detail-text">
+
+                    <h3>💙 雙心石滬</h3>
+
+                    <p>
+                        石滬是澎湖傳統的捕魚方式之一。
+                        當潮水退去時，魚群會被石牆阻擋，
+                        居民就能利用這種方式捕魚。
+                        雙心石滬則因為特殊的心形造型而聞名。
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- 3 -->
+
+            <div class="detail">
+
+                <div class="detail-art">
+                    🏠
+                </div>
+
+                <div class="detail-text">
+
+                    <h3>🏠 澎湖傳統建築</h3>
+
+                    <p>
+                        澎湖傳統古厝常使用珊瑚石、玄武岩等
+                        當地容易取得的材料建造。
+                        厚實的牆壁也能幫助居民抵抗強烈的海風，
+                        展現出海島居民因地制宜的智慧。
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         美食
+    ========================= -->
+
+    <section class="food" id="food">
+
+        <div class="section-title">
+            <span>TASTE OF PENGHU</span>
+            <h2>澎湖美食</h2>
+            <p>旅行當然也要吃東西 🍴</p>
+        </div>
+
+        <div class="food-grid">
+
+            <div class="food-card">
+
+                <div class="food-icon">
+                    🍨
+                </div>
+
+                <h3>仙人掌冰</h3>
+
+                <p>
+                    澎湖代表性的特色冰品，
+                    酸甜清爽又有漂亮的紫紅色。
+                </p>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-icon">
+                    🍰
+                </div>
+
+                <h3>黑糖糕</h3>
+
+                <p>
+                    使用黑糖製作的傳統糕點，
+                    香甜Q軟，是澎湖常見伴手禮。
+                </p>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-icon">
+                    🥜
+                </div>
+
+                <h3>澎湖花生</h3>
+
+                <p>
+                    澎湖盛產花生，
+                    可以做成各種花生特色食品。
+                </p>
+
+            </div>
+
+
+            <div class="food-card">
+
+                <div class="food-icon">
+                    🍵
+                </div>
+
+                <h3>風茹茶</h3>
+
+                <p>
+                    使用澎湖特有植物風茹製作，
+                    是具有地方特色的茶飲。
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         小知識
+    ========================= -->
+
+    <section class="facts">
+
+        <div class="section-title">
+            <span>FUN FACTS</span>
+            <h2>澎湖小知識</h2>
+            <p>一些你可能不知道的小事情</p>
+        </div>
+
+        <div class="facts-grid">
+
+            <div class="fact">
+                <strong>90+</strong>
+                <span>座島嶼組成澎湖群島</span>
+            </div>
+
+            <div class="fact">
+                <strong>2</strong>
+                <span>座主要跨海橋梁連接重要島嶼</span>
+            </div>
+
+            <div class="fact">
+                <strong>🌊</strong>
+                <span>海洋文化是澎湖生活的重要一部分</span>
+            </div>
+
+            <div class="fact">
+                <strong>🎆</strong>
+                <span>夏季花火是澎湖代表性的活動</span>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         花火
+    ========================= -->
+
+    <section class="fireworks" id="fireworks-section">
+
+        <div id="fireworks"></div>
+
+        <div class="section-title">
+
+            <span>PENGHU FIREWORKS</span>
+
+            <h2>澎湖花火</h2>
+
+            <p>
+                夜晚的澎湖，還有一場寫在天空上的風景。
+            </p>
+
+        </div>
+
+        <button
+            class="firework-button"
+            onclick="launchFirework()"
+        >
+            ✨ 點我放煙火
+        </button>
+
+    </section>
+
+
+    <!-- =========================
+         Footer
+    ========================= -->
+
+    <footer>
+
+        <h3>🌊 澎湖旅行誌</h3>
+
+        <p>
+            海風吹過的地方，故事就留在島上。
+        </p>
+
+        <p>
+            © 2026 Penghu Travel
+        </p>
+
+    </footer>
+
+
+    <!-- =========================
+         回到頂端
+    ========================= -->
+
+    <button id="topBtn" onclick="goTop()">
+        ↑
+    </button>
+
+
+    <!-- =========================
+         JavaScript
+    ========================= -->
+
+    <script>
+
+        /* 景點介紹 */
+
+        function showInfo(message) {
+            alert(message);
+        }
+
+
+        /* 回到頂端 */
+
+        const topBtn = document.getElementById("topBtn");
+
+        window.addEventListener("scroll", function () {
+
+            if (window.scrollY > 400) {
+                topBtn.style.display = "block";
+            } else {
+                topBtn.style.display = "none";
+            }
+
+        });
+
+
+        function goTop() {
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =========================
+           煙火彩蛋
+        ========================= */
+
+        function launchFirework() {
+
+            const container = document.getElementById("fireworks");
+
+            for (let i = 0; i < 35; i++) {
+
+                const spark = document.createElement("div");
+
+                spark.classList.add("spark");
+
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 80 + Math.random() * 180;
+
+                const x = Math.cos(angle) * distance;
+                const y = Math.sin(angle) * distance;
+
+                spark.style.setProperty("--x", x);
+                spark.style.setProperty("--y", y);
+
+                spark.style.left =
+                    (45 + Math.random() * 10) + "%";
+
+                spark.style.top =
+                    (35 + Math.random() * 20) + "%";
+
+                container.appendChild(spark);
+
+                setTimeout(function () {
+                    spark.remove();
+                }, 1500);
+
+            }
+
+        }
+
+    </script>
+
+</body>
+</html>
